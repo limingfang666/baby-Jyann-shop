@@ -1,0 +1,36 @@
+@font-face {
+  font-family: "bjsicons"; /* Project id 4090979 */
+  src: url('/static/ttf/iconfont.woff2') format('woff2'),
+       url('/static/ttf/iconfont.woff') format('woff'),
+       url('/static/ttf/iconfont.ttf') format('truetype');
+}
+
+.bjsicons {
+  font-family: "bjsicons" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bjs-delete:before {
+  content: "\e600";
+}
+
+.bjs-hot:before {
+  content: "\706b";
+}
+
+.bjs-shuqian-gray:before {
+  content: "\e660";
+}
+
+.bjs-shuqian-red:before {
+  content: "\e65f";
+}
+
+.bjs-search:before {
+  content: "\e615";
+}
+
+

@@ -1,17 +1,128 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "宝酱小铺"
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
+
+		}, {
+			"path": "pages/categories/categories",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "分类"
+			}
+
+		}, {
+			"path": "pages/cart/cart",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "购物袋"
+			}
+
+		}, {
+			"path": "pages/community/community",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "社区"
+			}
+		}, {
+			"path": "pages/mine/mine",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationBarTitleText": "我的"
+			}
+
 		}
 	],
+	"subPackages": [{
+			"root": "packageSearch",
+			"pages": [{
+				"path": "search/search",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"backgroundColor": "#fefefe",
+					"backgroundColorBottom": "#8d8d8d"
+				}
+
+			}]
+		},
+		{
+			"root": "packageGoods",
+			"pages": [{
+				"path": "goods-detail/goods-detail",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}    ,{
+                    "path" : "goods-list/goods-list",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+		}, {
+			"root": "packageCart",
+			"pages": [{
+				"path": "settle/settle",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}]
+		}
+	],
+	
+	"tabBar": {
+		"list": [{
+				"text": "首页",
+				"pagePath": "pages/home/home",
+				"iconPath": "static/tab_icons/home.png",
+				"selectedIconPath": "static/tab_icons/home-active.png"
+			},
+			{
+				"text": "分类",
+				"pagePath": "pages/categories/categories",
+				"iconPath": "static/tab_icons/cate.png",
+				"selectedIconPath": "static/tab_icons/cate-active.png"
+			},
+			{
+				"text": "社区",
+				"pagePath": "pages/community/community",
+				"iconPath": "static/tab_icons/community.png",
+				"selectedIconPath": "static/tab_icons/community-active.png"
+			},
+			{
+				"text": "购物袋",
+				"pagePath": "pages/cart/cart",
+				"iconPath": "static/tab_icons/cart.png",
+				"selectedIconPath": "static/tab_icons/cart-active.png"
+			},
+			{
+				"text": "我的",
+				"pagePath": "pages/mine/mine",
+				"iconPath": "static/tab_icons/my.png",
+				"selectedIconPath": "static/tab_icons/my-active.png"
+			}
+		]
+	},
+	
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "宝酱小铺",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#ffffff",
+		"backgroundColorTop": "#ffffff",
+		// "navigationStyle": "custom"
+		"navigationStyle": "default"
 	},
 	"uniIdRouter": {}
 }
