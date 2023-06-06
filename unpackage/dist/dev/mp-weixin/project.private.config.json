@@ -3,5 +3,32 @@
   "projectname": "baby-Jyann-shop",
   "setting": {
     "compileHotReLoad": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "搜索页面",
+          "pathName": "packageSearch/search/search",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "分类",
+          "pathName": "pages/categories/categories",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "首页",
+          "pathName": "pages/home/home",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }

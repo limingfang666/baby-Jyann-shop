@@ -1,0 +1,15 @@
+{
+  "name": "baby-jyann-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@escook/request-miniprogram": "^0.2.1",
+    "vuex": "^4.1.0"
+  }
+}
