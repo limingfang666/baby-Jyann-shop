@@ -44,7 +44,9 @@
 					"navigationBarTitleText": "",
 					"enablePullDownRefresh": false,
 					"backgroundColor": "#fefefe",
-					"backgroundColorBottom": "#8d8d8d"
+					"backgroundColorBottom": "#8d8d8d",
+					// 下拉时背景色和全局不一样
+					"backgroundColorTop": "#ffffff"
 				}
 
 			}]
@@ -54,8 +56,12 @@
 			"pages": [{
 				"path": "goods-detail/goods-detail",
 				"style": {
-					"navigationBarTitleText": "",
-					"enablePullDownRefresh": false
+					"navigationBarTitleText": "商品详情",
+					"enablePullDownRefresh": true,
+					"backgroundColor": "#f5f3f4",
+					// // 页面顶部窗口背景色（下拉后背景色）
+					"backgroundColorTop":  "#333333",
+					"backgroundColorBottom":  "#333333"
 				}
 
 			}    ,{
@@ -63,7 +69,8 @@
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
+                    "enablePullDownRefresh": true,
+					"onReachBottomDistance": 50
                 }
                 
                 }
@@ -114,15 +121,17 @@
 			}
 		]
 	},
-	
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "宝酱小铺",
 		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#ffffff",
-		"backgroundColorTop": "#ffffff",
+		// "backgroundColorTop": "#ffffff",
+		// 页面顶部窗口背景色（下拉后背景色）
+		"backgroundColorTop":  "#333333",
 		// "navigationStyle": "custom"
 		"navigationStyle": "default"
+		
 	},
 	"uniIdRouter": {}
 }

@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@escook/request-miniprogram": "^0.2.1",
-    "vuex": "^4.1.0"
+    "@escook/request-miniprogram": "^0.2.1"
   }
 }

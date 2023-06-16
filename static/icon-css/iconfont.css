@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "bjsicons"; /* Project id 4090979 */
+  font-family: "bjsicons"; 
   src: url('/static/ttf/iconfont.woff2') format('woff2'),
        url('/static/ttf/iconfont.woff') format('woff'),
-       url('/static/ttf/iconfont.ttf') format('truetype');
+       url('/static/ttf/iconfont.ttf') format('truetype')
 }
 
 .bjsicons {
@@ -11,6 +11,42 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.bjs-share:before {
+  content: "\e661";
+}
+
+.bjs-xianshigou:before {
+  content: "\e614";
+}
+
+.bjs-no-sort:before {
+  content: "\e85a";
+}
+
+.bjs-sort-down:before {
+  content: "\e601";
+}
+
+.bjs-sort-up:before {
+  content: "\e859";
+}
+
+.bjs-kids:before {
+  content: "\e769";
+}
+
+.bjs-wushangpin:before {
+  content: "\e755";
+}
+
+.bjs-shopping-bag:before {
+  content: "\e858";
+}
+
+.bjs-goods-icon:before {
+  content: "\e606";
 }
 
 .bjs-delete:before {

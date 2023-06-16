@@ -9,17 +9,17 @@
 		<bjs-search class="search-box" :searchHistory="searchHistory" @search="search"></bjs-search>
 
 		<!-- 轮播图区-->
-		<swiper class="swiper-box" :indicator-dots="true" indicator-color="rgba(238, 238, 238, 0.3)" circular
+		<swiper v-if="swiperList" class="swiper-box" :indicator-dots="true" indicator-color="rgba(238, 238, 238, 0.3)" circular
 		 indicator-active-color="rgba(238, 238, 238, 1)" :autoplay="true" :interval="3000" :duration="1000">
 			<swiper-item v-for="item in swiperList" :key="item.goods_id">
-				<navigator class="swiper-item" :url="'/packageGoods/goods-detail/goods-detail?goods_id='+item.goods_id" open-type="navigate">
+				<navigator class="swiper-list" :url="'/packageGoods/goods-detail/goods-detail?goods_id='+item.goods_id" open-type="navigate">
 					<image class="swiper-image" :src="item.image_src"></image>
 				</navigator>
 			</swiper-item>
 		</swiper>
 		
 		<!-- 类目展示区 -->
-		<scroll-view class="category-box" scroll-y="true" refresher-background="green" enable-flex scroll-anchoring="true" 
+		<scroll-view v-if="categoryList" class="category-box" scroll-y="true" refresher-background="green" enable-flex scroll-anchoring="true" 
 		show-scrollbar="true" scroll-left="120" scroll-with-animation>
 			<navigator class="category-item" url="/pages/categories/categories" open-type="switchTab"
 			v-for="item in categoryList" :key="item.name">
@@ -28,7 +28,7 @@
 		</scroll-view>
 
 		<!-- 楼层区-->
-		<view class="floor-box" v-for="(item,index) in floordataList" :key="index">
+		<view v-if="floordataList" class="floor-box" v-for="(item,index) in floordataList" :key="index">
 			<view class="floor-title">
 				<image class="floor-image" :src="item.floor_title.image_src"></image>
 			</view>
@@ -138,7 +138,7 @@
 			height: 100%;
 			width: 100%;
 			
-			.swiper-item{
+			.swiper-list{
 				height: 100%;
 				width: 100%;
 				
@@ -162,6 +162,7 @@
 			height: 200rpx;
 			margin-top: 16px;
 			display: flex;
+			flex-wrap: wrap;
 			justify-content: space-between;
 			align-items: center;
 			
@@ -186,12 +187,11 @@
 			margin-bottom: 20px;
 			
 			.floor-title{
-				width: 1000rpx;
 				height: 13%;
 				
 				.floor-image{
-					width: 1000rpx;
-					height: 80rpx;
+					height: 65rpx;
+					margin-left: 3px;
 				}
 			}
 			
@@ -199,7 +199,6 @@
 				display:flex;
 				width: 100%;
 				height: 87%;
-				margin: 10rpx 0;
 				
 				.floor-image-left{
 					width: 33%;
@@ -217,11 +216,11 @@
 					height: 100%;
 					display: flex;
 					flex-wrap: wrap;
-					justify-content: space-around;
-					// margin: 10rpx;
-						// padding: 0 10rpx;
+					justify-content: flex-start;
 					
 					.image-right{
+						// 所有图片间距相等：父级使用flex布局，和默认justify-content: flex-start;子级使用margin调间距宽度
+						margin-left: 10px;
 						width: 44%;
 						height: 48%;
 						padding-bottom: 20rpx;

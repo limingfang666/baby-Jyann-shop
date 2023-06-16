@@ -63,7 +63,6 @@
 		},
 		methods:{
 			search(){
-				console.log("子组件点击了");
 				this.$emit('search');
 			}
 		}

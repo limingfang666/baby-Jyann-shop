@@ -2,11 +2,12 @@
 	<view class="category-box">
 		<!-- 搜索栏：固定 -->
 		<view class="bjs-box">
-			<bjs-search :customIcon="true" placeholder="搜索" bgColor="#f1f1f1" iconColor="black"></bjs-search>
+			<bjs-search :customIcon="true" placeholder="搜索" bgColor="#f1f1f1" iconColor="black"
+				@search="search"></bjs-search>
 		</view>
 
 		<!-- 商品展示区 -->
-		<view class="category" :style="'height:'+ categoryHeight" v-if="categoryList.length>0">
+		<view class="category" :style="'height:'+ contentHeight" v-if="categoryList.length>0">
 			<!--scroll-view各个属性设置时必须使用:bind形式  -->
 			<!-- 左侧菜单栏 -->
 			<scroll-view class="category-first" :enable-flex="true" scroll-y :show-scrollbar="false"
@@ -19,24 +20,29 @@
 
 			<!-- 右侧商品列表 -->
 			<scroll-view class="category-content" :enable-flex="true" scroll-y :show-scrollbar="false"
-				:scroll-with-animation="true">
+				:scroll-top="scrollToTop" :scroll-with-animation="true">
+				<!--:scroll-top="scrollToTop" :scroll-with-animation="true">  -->
+				<!-- 轮播图 -->
+				<swiper class="swiper-box" circular :autoplay="true" :interval="3000" :duration="1000"
+					v-if="secondCateList.length>0 && secondCateList[0].children.length>0">
+					<swiper-item class="swiper-content" v-for="swiperItem in secondCateList[0].children"
+						:key="swiperItem.cat_id">
+						<view class="swiper-item">
+							<image class="swiper-image" :src="swiperItem.cat_icon"></image>
+						</view>
+					</swiper-item>
+				</swiper>
 				<view class="category-content-box" v-for="(secondCategory,index) in secondCateList"
 					:key="secondCategory.cat_id">
-					<!-- 轮播图 -->
-					<swiper class="swiper-box" circular :autoplay="true" :interval="3000" :duration="1000">
-						<swiper-item class="swiper-content" v-for="(thirdCategory,index) in secondCategory.children" :key="thirdCategory.cat_id">
-							<view class="swiper-item">
-								<image class="swiper-image" :src="thirdCategory.cat_icon"></image>
-							</view>
-						</swiper-item>
-					</swiper>
 					<view class="category-second">
 						<view class="second-title">{{secondCategory.cat_name}}</view>
 						<uni-icons type="right" size="18" color="#9e9e9e"></uni-icons>
 					</view>
 					<view class="category-third">
+						<!-- 点击进入商品列表 -->
 						<view class="third-content" v-for="(thirdCategory,index) in secondCategory.children"
-							:key="thirdCategory.cat_id">
+							:key="thirdCategory.cat_id"
+							@click="gotoGoodsList(thirdCategory.cat_id,thirdCategory.cat_name)">
 							<image class="third-image" :src="thirdCategory.cat_icon"></image>
 							<text class="third-text">{{thirdCategory.cat_name}}</text>
 						</view>
@@ -55,22 +61,33 @@
 	import {
 		unifyRequest
 	} from '@/composables/unify-request'
+	import {
+		getSystemHeight
+	} from "@/utils/common.js"
+	import {
+		nextTick
+	} from "vue";
 
 	export default {
 		data() {
 			return {
 				categoryList: [],
-				categoryHeight: 0,
 				isActive: 0,
 				secondCateList: [],
 				thirdCateList: [],
-				swiperList:[],
+				swiperList: [],
+				// 保证每次切换，滚动条位置都在最顶部
+				scrollToTop: 0,
 			};
 		},
 		async onLoad() {
 			await this.getCategoryList();
-			this.getContentHeight();
 			this.clickFirstCategory(0);
+		},
+		computed: {
+			contentHeight() {
+				return (getSystemHeight() - 48) + 'px';
+			}
 		},
 		methods: {
 			async getCategoryList() {
@@ -78,20 +95,29 @@
 					list
 				} = await unifyRequest(getCategoryData);
 				this.categoryList = list;
-				
-			},
-			getContentHeight() {
-				// 内容区的高度根据wx.getSystemInfoSync()动态获取：总高度-navigateBar高度-自定义组件高度
-				const res = wx.getSystemInfoSync();
-				this.categoryHeight = (res.windowHeight - 48) + 'px';
+
 			},
 			clickFirstCategory(index) {
 				this.isActive = index;
-				// 点击过快时，商品展示报错（找不到children）
+
 				if (this.categoryList.length > 0 && this.categoryList[index])
 					this.secondCateList = this.categoryList[index].children;
 				if (this.secondCateList.length > 0 && this.secondCateList[index])
 					this.thirdCateList = this.secondCateList[index].children;
+
+				// 每次点击都保证scroll滚动条在最顶部
+				this.scrollToTop = this.scrollToTop ? 0 : 1;
+			},
+			search() {
+				// 跳转到非tabBar页面
+				uni.navigateTo({
+					url: '/packageSearch/search/search'
+				})
+			},
+			gotoGoodsList(cateId, cateName) {
+				uni.navigateTo({
+					url: '/packageGoods/goods-list/goods-list?cid=' + cateId + '&query=' + cateName
+				})
 			}
 		}
 	}
@@ -172,6 +198,29 @@
 				box-sizing: border-box;
 				padding: 10px;
 
+				.swiper-box {
+					width: 100%;
+					height: 110px;
+					border-radius: 10px;
+
+					.swiper-content {
+						width: 100%;
+						height: 100%;
+
+						.swiper-item {
+							width: 100%;
+							height: 100%;
+							display: flex;
+							justify-content: center;
+
+							.swiper-image {
+								width: 80%;
+								height: 100%;
+							}
+						}
+					}
+				}
+
 				.category-content-box {
 					display: flex;
 					flex-direction: column;
@@ -179,29 +228,6 @@
 					height: fit-content;
 					border-bottom: 0.5px solid #e8e8e8;
 					margin: 10px 0;
-					
-					.swiper-box{
-						width: 100%;
-						height: 120px;
-						margin: 10px 0;
-						
-						.swiper-content{
-							width: 100%;
-							height: 100%;
-							
-							.swiper-item{
-								width: 100%;
-								height: 100%;
-								display: flex;
-								justify-content: center;
-								
-								.swiper-image{
-									width: 80%;
-									height: 100%;
-								}
-							}
-						}
-					}
 
 					.category-second {
 						width: 100%;

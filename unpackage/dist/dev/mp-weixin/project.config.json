@@ -20,7 +20,7 @@
     "ignoreUploadUnusedFiles": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.32.0",
+  "libVersion": "",
   "appid": "wx2e7b06a3cf8edff3",
   "projectname": "baby-Jyann-shop",
   "condition": {
