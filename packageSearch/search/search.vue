@@ -75,7 +75,7 @@
 	import {
 		getSearchAdvise
 	} from "@/api/api.ts"
-	import _ from "@/utils/debounce-throttle.js"
+	import _ from "@/packageSearch/utils/debounce-throttle.js"
 
 
 	export default {
@@ -84,10 +84,8 @@
 				searchVal: '',
 				favoriteList: ['睡袋', '水杯', '凉席', '驱蚊', '口红', '蚊香液', '马桶', '洗衣液', '保温杯', '风扇'],
 				timer: null,
-				searchList: [{
-					goods_id: 36651,
-					goods_name: "郑品 整套黑诗陶瓷茶具套装 祥云电热炉茶盘套装ZT-13KSDF10"
-				}],
+				// {goods_id: 36651,goods_name: "郑品 整套黑诗陶瓷茶具套装 祥云电热炉茶盘套装ZT-13KSDF10"}
+				searchList: [],
 			};
 		},
 		computed: {
@@ -118,7 +116,6 @@
 					list
 				} = await unifyRequest(getSearchAdvise, keyword);
 				this.searchList = list;
-				console.log(list, this.searchList);
 			},
 			updateHistory(val) {
 				if(val==='') return;
