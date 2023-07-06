@@ -18,6 +18,7 @@ app.$mount()
 import { createSSRApp } from 'vue'
 import { showMsg } from "@/utils/message"
 import store from '@/store/store'
+import piniaStore from '@/store/index'
 
 export function createApp() {
   const app = createSSRApp(App)
@@ -25,6 +26,9 @@ export function createApp() {
 	app.config.globalProperties.$showMsg = showMsg;
 	// 加载store到全局
 	app.use(store);
+	
+	// 加载pinia到全局
+	app.use(piniaStore);
 	
   return {
     app

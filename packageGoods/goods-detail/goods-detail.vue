@@ -1,12 +1,12 @@
 <template>
-	<view v-if="goodsList">
+	<view v-if="goodsInfo">
 		<scroll-view class="goods-detail-box" :scroll-y="true" :show-scrollbar="true"
 			:style="'height:'+goodsNavTop+'px'">
 			<swiper class="swiper-box" :interval="3000" :duration="1000">
-				<swiper-item class="swiper-list" v-for="(item,index) in goodsList.pics" :key="item.pics_id">
+				<swiper-item class="swiper-list" v-for="(item,index) in goodsInfo.pics" :key="item.pics_id">
 					<view class="swiper-view">
 						<image class="swiper-image" :src="item.pics_big_url"></image>
-						<view class="swiper-pageNum" v-if="goodsList.pics">{{index+1}}/{{goodsList.pics.length}}</view>
+						<view class="swiper-pageNum" v-if="goodsInfo.pics">{{index+1}}/{{goodsInfo.pics.length}}</view>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -17,12 +17,9 @@
 							<uni-icons class="" custom-prefix="bjsicons" type="bjs-xianshigou" size="24"></uni-icons>
 						</template>
 					</view>
-					<view class="price-symbol">￥</view>
-					<view class="price" v-if="goodsList.goods_price!==''">
-						{{getPriceNoMark(goodsList.goods_price)}}
-					</view>
-					<view class="old-price" v-if="goodsList.goods_price!==''">
-						{{getPrice(goodsList.goods_price * 0.8)}}
+					<bjs-price :color="'#FFFFFF'" :price="goodsInfo.goods_price"></bjs-price>
+					<view class="old-price" v-if="goodsInfo.goods_price!==''">
+						{{getPrice(goodsInfo.goods_price || 0)}}
 					</view>
 				</view>
 				<view class="price-right">
@@ -32,11 +29,11 @@
 				</view>
 			</view>
 			<view class="goods-desc">
-				<view class="goods-name" v-if="goodsList.goods_name">
-					<view class="goods-title">{{goodsList.goods_name}}</view>
-					<view class="goods-feature" v-if="goodsList.attrs">
-						<view class="goods-feature-item" v-if="goodsList.attrs[1].attr_value!==''"
-							v-for="(feature,index) in goodsFeature(goodsList.attrs[1].attr_value)" :key="index">
+				<view class="goods-name" v-if="goodsInfo.goods_name">
+					<view class="goods-title">{{goodsInfo.goods_name}}</view>
+					<view class="goods-feature" v-if="goodsInfo.attrs">
+						<view class="goods-feature-item" v-if="goodsInfo.attrs[1].attr_value!==''"
+							v-for="(feature,index) in goodsFeature(goodsInfo.attrs[1].attr_value)" :key="index">
 							{{feature}}
 						</view>
 					</view>
@@ -50,7 +47,7 @@
 			</view>
 			<view class="goods-attr">
 				<view class="goods-logo">
-					<image class="goods-logo-image" :src="goodsList.goods_big_logo" mode="scaleToFill"></image>
+					<image class="goods-logo-image" :src="goodsInfo.goods_big_logo" mode="scaleToFill"></image>
 				</view>
 				<view class="goods-attr-box">
 					<view class="sell">
@@ -118,8 +115,8 @@
 					</swiper-item>
 				</swiper>
 			</view>
-			<rich-text class="goods-introduce" v-if="goodsList.goods_introduce"
-				:nodes="imgIntroduce(goodsList.goods_introduce)"></rich-text>
+			<rich-text class="goods-introduce" v-if="goodsInfo.goods_introduce"
+				:nodes="imgIntroduce(goodsInfo.goods_introduce)"></rich-text>
 		</scroll-view>
 		<uni-goods-nav :style="'top:'+goodsNavTop+'px;height:180rpx'" class="goods-navs" :options="options"
 			:button-group="customButtonGroup" @click="onClick" @buttonClick="buttonClick" />
@@ -140,19 +137,23 @@
 		formatPriceNoMark,
 		getSystemHeight
 	} from "@/utils/common"
-
+	
+	// 使用pinia：建议属性使用storeToRefs()解构，方法直接结构
+	import { storeToRefs, mapStores,mapActions,mapState,mapGetters } from 'pinia';
+	import {useCartStore} from '@/store/pinia/cart';
+	
 	export default {
 		data() {
 			return {
 				query: {},
-				goodsList: [],
+				goodsInfo: [],
 				options: [{
 					icon: 'shop',
 					text: '首页'
 				}, {
 					icon: 'cart',
 					text: '购物袋',
-					info: 2,
+					info: 0,
 					infoBackgroundColor: '#bc2840',
 					// infoColor: "white"
 				}, {
@@ -175,6 +176,11 @@
 			};
 		},
 		computed: {
+			// 注意，我们不是在传递一个数组，而是一个接一个的 store。
+			// 可以 id+'Store' 的形式访问每个 store 。
+			 // ...mapStores(useCartStore),
+			 // ...mapState(useCartStore,['goodsCount']),
+			...mapGetters(useCartStore,['goodsCount']),
 			goodsNavTop() {
 				return getSystemHeight() - 90;
 			},
@@ -194,19 +200,20 @@
 		onLoad(options) {
 			this.query = options;
 			this.getGoodsDetail();
+			this.options[1].info = this.goodsCount;
 		},
 		methods: {
+			// mapActions要用在methods里面
+			...mapActions(useCartStore, ['addGoodsInfo']),
 			async getGoodsDetail() {
 				const {
 					list
 				} = await unifyRequest(getGoodsDetailList, {
 					goods_id: this.query.goods_id
 				});
-				this.goodsList = list;
-				console.log(this.goodsList);
+				this.goodsInfo = list;
 			},
 			onClick(e) {
-				console.log(e.content.text);
 				if(e.content.text === "首页"){
 					uni.switchTab({
 						url:'/pages/home/home'
@@ -217,11 +224,19 @@
 					})
 				}else if(e.content.text === "客服"){
 					console.log("链接客服");
+				}else{
+					console.log("没有其他的了");
 				}
 			},
 			buttonClick(e) {
-				console.log(e)
-				this.options[2].info++
+				// 加入购物袋（需要将商品信息存入状态管理库）
+				if(e.index === 0){
+					this.addGoodsInfo(this.goodsInfo);
+					this.options[1].info = this.goodsCount;
+				// 立即购买
+				}else{
+					
+				}
 			}
 		}
 	}

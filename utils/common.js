@@ -4,8 +4,7 @@ function formatPrice(price) {
 }
 
 function formatPriceNoMark(price) {
-	console.log(price);
-	if(price==='' || price=== undefined) return 0.00;
+	if(price===' ' || price=== undefined) return 0.00;
 	return price.toFixed(2);
 }
 

@@ -3,7 +3,9 @@ Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const common_vendor = require("./common/vendor.js");
 const utils_message = require("./utils/message.js");
 const store_store = require("./store/store.js");
+const store_index = require("./store/index.js");
 require("./store/history.js");
+require("./uni_modules/pinia-plugin-unistorage/index.js");
 if (!Math) {
   "./pages/home/home.js";
   "./pages/categories/categories.js";
@@ -28,6 +30,7 @@ function createApp() {
   const app = common_vendor.createSSRApp(App);
   app.config.globalProperties.$showMsg = utils_message.showMsg;
   app.use(store_store.store);
+  app.use(store_index.piniaStore);
   return {
     app
   };
