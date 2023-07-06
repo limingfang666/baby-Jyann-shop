@@ -13,6 +13,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.bjs-red-heart:before {
+  content: "\e663";
+}
+
+.bjs-no-goods:before {
+  content: "\e602";
+}
+
+.bjs-no-goods-show:before {
+  content: "\e720";
+}
+
 .bjs-share:before {
   content: "\e661";
 }

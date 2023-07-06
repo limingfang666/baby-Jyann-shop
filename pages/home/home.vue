@@ -50,6 +50,7 @@
 <script lang="ts">
 	import { getSwiper, getCategories, getFloordata } from "@/api/api";
 	import { unifyRequest } from '@/composables/unify-request'
+	import { setTabBarInfo } from "@/composables/tabBar-logoInfo"
 	
 	export default {
 		data() {
@@ -64,6 +65,8 @@
 			this.getSwiperList();
 			this.getCategoryList();
 			this.getFloordataList();
+			// 给tabBar页面设置徽标
+			setTabBarInfo();
 		},
 		onShow(){
 			this.getSwiperList();

@@ -67,6 +67,7 @@
 	import {
 		nextTick
 	} from "vue";
+	import { setTabBarInfo } from "@/composables/tabBar-logoInfo"
 
 	export default {
 		data() {
@@ -83,6 +84,8 @@
 		async onLoad() {
 			await this.getCategoryList();
 			this.clickFirstCategory(0);
+			// 给tabBar页面设置徽标
+			setTabBarInfo();
 		},
 		computed: {
 			contentHeight() {

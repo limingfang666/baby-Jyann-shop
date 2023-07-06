@@ -5,11 +5,16 @@
 </template>
 
 <script>
+	import { setTabBarInfo } from "@/composables/tabBar-logoInfo"
 	export default {
 		data() {
 			return {
 				
 			};
+		},
+		onLoad() {
+			// 给tabBar页面设置徽标
+			setTabBarInfo();
 		}
 	}
 </script>

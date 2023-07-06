@@ -14,8 +14,7 @@
 			</view>
 			<view class="price-box">
 				<view class="price">
-					<view class="now-price"><text class="price-mark">￥</text>{{getPriceNoMark(goods.goods_price * 0.8)}}
-					</view>
+					<bjs-price :price="goods.goods_price * 0.8"></bjs-price>
 					<view class="old-price">{{getPrice(goods.goods_price)}}</view>
 				</view>
 				<view class="buy">
@@ -53,9 +52,6 @@
 			getPrice() {
 				return formatPrice;
 			},
-			getPriceNoMark() {
-				return formatPriceNoMark;
-			}
 		},
 		onLoad() {
 			console.log(this.goods);
@@ -125,17 +121,6 @@
 
 			.price {
 				width: 50%;
-
-				.now-price {
-					font-size: 20px;
-					color: #bf2944;
-					height: 70%;
-					line-height: 46px;
-
-					.price-mark {
-						font-size: 13px;
-					}
-				}
 
 				.old-price {
 					// 继承的goods-tips类在html中也必须有
