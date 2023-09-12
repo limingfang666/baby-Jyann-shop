@@ -57,6 +57,48 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "商品结算页",
+          "pathName": "packageSettle/settle/settle",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "登录页",
+          "pathName": "packageUser/login/login",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "我的",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "收货地址列表页",
+          "pathName": "packageAddress/address/address-list",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "新增地址",
+          "pathName": "packageAddress/address/address-add",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "社区",
+          "pathName": "pages/community/community",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

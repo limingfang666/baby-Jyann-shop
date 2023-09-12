@@ -21,12 +21,28 @@
       ]
     },
     {
-      "root": "packageCart",
+      "root": "packageSettle",
       "pages": [
         "settle/settle"
       ]
+    },
+    {
+      "root": "packageAddress",
+      "pages": [
+        "address/address-list",
+        "address/address-add"
+      ]
+    },
+    {
+      "root": "packageUser",
+      "pages": [
+        "login/login"
+      ]
     }
   ],
+  "usingComponents": {
+    "van-button": "/wxcomponents/@vant/weapp/button/index"
+  },
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "宝酱小铺",
@@ -69,5 +85,14 @@
       }
     ]
   },
-  "usingComponents": {}
+  "requiredPrivateInfos": [
+    "choosePoi",
+    "chooseAddress",
+    "getLocation"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用来进行接口调试"
+    }
+  }
 }

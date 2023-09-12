@@ -15,7 +15,10 @@ if (!Math) {
   "./packageSearch/search/search.js";
   "./packageGoods/goods-detail/goods-detail.js";
   "./packageGoods/goods-list/goods-list.js";
-  "./packageCart/settle/settle.js";
+  "./packageSettle/settle/settle.js";
+  "./packageAddress/address/address-list.js";
+  "./packageAddress/address/address-add.js";
+  "./packageUser/login/login.js";
 }
 const _sfc_main = {
   onLaunch: function() {

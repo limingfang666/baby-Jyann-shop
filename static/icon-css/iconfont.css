@@ -13,6 +13,107 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.bjs-wechat-icon:before {
+  content: "\e617";
+}
+
+.bjs-edit:before {
+  content: "\e73f";
+}
+
+.bjs-baby-avatar:before {
+  content: "\e604";
+}
+
+.bjs-avatar:before {
+  content: "\e66e";
+}
+
+.bjs-my-community:before {
+  content: "\e664";
+}
+/* 我的周期购 */
+.bjs-cycle-purchase:before {
+  content: "\e647";
+}
+
+.bjs-scan:before {
+  content: "\e649";
+}
+
+.bjs-online-service:before {
+  content: "\e621";
+}
+
+.bjs-points-mall:before {
+  content: "\e60d";
+}
+
+.bjs-black-card:before {
+  content: "\e638";
+}
+
+.bjs-VIP:before {
+  content: "\e620";
+}
+/* 我的试用 */
+.bjs-on-trial:before {
+  content: "\e637";
+}
+/* 意见反馈 */
+.bjs-feedback:before {
+  content: "\e68e";
+}
+
+.bjs-QRCode:before {
+  content: "\e6bd";
+}
+
+.bjs-baby-book:before {
+  content: "\e659";
+}
+
+.bjs-exchange:before {
+  content: "\e616";
+}
+
+.bjs-my-address:before {
+  content: "\e668";
+}
+
+.bjs-baby-bottle:before {
+  content: "\e640";
+}
+
+.bjs-being-pay:before {
+  content: "\e624";
+}
+
+.bjs-being-send:before {
+  content: "\e603";
+}
+
+.bjs-being-received:before {
+  content: "\e683";
+}
+
+.bjs-after-sales:before {
+  content: "\e63a";
+}
+
+/* 人工智能 */
+.bjs-intelligence:before {
+  content: "\eb39";
+}
+
+.bjs-consignee-info:before {
+  content: "\e62b";
+}
+
+.bjs-consignee-address:before {
+  content: "\e6a8";
+}
+
 .bjs-red-heart:before {
   content: "\e663";
 }

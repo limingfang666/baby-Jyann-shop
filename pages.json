@@ -18,7 +18,12 @@
 			"path": "pages/cart/cart",
 			"style": {
 				"enablePullDownRefresh": false,
-				"navigationBarTitleText": "购物袋"
+				"navigationBarTitleText": "购物袋",
+				"disableScroll": true,
+				"app-plus":{
+					"bounce":"none"
+				}
+				
 			}
 
 		}, {
@@ -33,7 +38,6 @@
 				"enablePullDownRefresh": false,
 				"navigationBarTitleText": "我的"
 			}
-
 		}
 		
 	],
@@ -77,15 +81,41 @@
                 }
             ]
 		}, {
-			"root": "packageCart",
+			"root": "packageSettle",
 			"pages": [{
 				"path": "settle/settle",
+				"style": {
+					"navigationBarTitleText": "宝酱小铺",
+					"enablePullDownRefresh": false
+				}
+			}]
+		}, {
+			"root": "packageAddress",
+			"pages": [{
+				"path": "address/address-list",
+				"style": {
+					"navigationBarTitleText": "收货地址",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "address/address-add",
+				"style": {
+					"navigationBarTitleText": "添加新地址",
+					"enablePullDownRefresh": false
+				}
+			}
+            ]
+		}, {
+			"root": "packageUser",
+			"pages": [{
+				"path": "login/login",
 				"style": {
 					"navigationBarTitleText": "",
 					"enablePullDownRefresh": false
 				}
-
-			}]
+			}
+            ]
 		}
 	],
 	
@@ -131,8 +161,10 @@
 		// 页面顶部窗口背景色（下拉后背景色）
 		"backgroundColorTop":  "#333333",
 		// "navigationStyle": "custom"
-		"navigationStyle": "default"
-		
+		"navigationStyle": "default",
+		"usingComponents": {
+			 "van-button": "/wxcomponents/@vant/weapp/button/index"
+		}
 	},
 	"uniIdRouter": {}
 }

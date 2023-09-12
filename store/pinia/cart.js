@@ -8,6 +8,7 @@ export const useCartStore = defineStore('cart',{
 			total: 0,
 			totalPrice: 0,
 			allChecked: false,
+			allNotCheck: false,
 		}
 	},
 	getters:{
@@ -24,7 +25,6 @@ export const useCartStore = defineStore('cart',{
 				this.goodsList.push(goodsInfo);
 			}else{
 				this.goodsList.map(item=>{
-					console.log(item);
 					if(item.goods_id === goodsInfo.goods_id){
 						// 没有则表示没有添加过（首次添加）
 						item['cart_counts'] = item['cart_counts'] + 1;
@@ -33,39 +33,66 @@ export const useCartStore = defineStore('cart',{
 				});
 			}
 		},
-		getGoodsQuality(goods_id){
-			return this.goodsList.filter(item=>item.goods_id === goods_id).length;
-		},
 		getTotal(){
 			let count = 0;
-			this.goodsList.forEach(item=>{
+			this.goodsList.map(item=>{
 				if(item.checked == true) count += item.cart_counts;
 			})
 			this.total = count;
 		},
 		getTotalPrice(){
 			let price = 0;
-			this.goodsList.forEach(item=>{
+			this.goodsList.map(item=>{
 				// 计算价格直接计算选中的价格即可，因为this.totalPrice每次都会重新复制，没选中的不会再计算进去
 				if(item.checked == true) price += item.goods_price * item.cart_counts;
 			})
 			this.totalPrice = price;
 		},
 		updateGoodsList(e,goods){
-			this.goodsList.map(item=>{
-				if(goods.goods_id === item.goods_id) this.goodsList.cart_counts = e;
-				return goods;
+			this.goodsList.forEach((item,index)=>{
+				if(goods.goods_id === item.goods_id) this.goodsList[index].cart_counts = e;
 			});
+			console.log(this.goodsList);
+			// this.getTotal();
+			// this.getTotalPrice();
+			this.getTotalAndTotalPrice();
+		},
+		getTotalAndTotalPrice(){
+			this.getTotal();
+			this.getTotalPrice();
 		},
 		getAllChecked(){
 			this.allChecked = this.goodsList.every(item=>item.checked===true);
 		},
+		getAllNotChecked(){
+			this.allNotCheck = this.goodsList.every(item=>item.checked!==true);
+		},
+		ifAllCheck() {
+			this.getAllChecked();
+			this.getAllNotChecked();
+		
+			// this.getTotal();
+			// this.getTotalPrice();
+			this.getTotalAndTotalPrice();
+		},
+		changeAllCheck(){
+			// this.allNotCheck = !this.allNotCheck;
+			this.goodsList.map(item => {
+				item.checked = !this.allChecked;
+			})
+			this.ifAllCheck();
+		},
 		deleteCartGoods(){
-			this.goodsList = this.goodsList.filter(item=>item['checked']!==true)
+			this.goodsList = this.goodsList.filter(item=>item['checked']!==true);
+			this.getTotalAndTotalPrice();
+			this.allChecked = false;
 		},
 		sliderDeleteGoods(goods_id){
 			this.goodsList = this.goodsList.filter(item=>item.goods_id !== goods_id)
-		}
+			// this.getTotal();
+			// this.getTotalPrice();
+			this.getTotalAndTotalPrice();
+		},
 	},
 	unistorage: true // 开启后对 state 的数据读写都将持久化
 })

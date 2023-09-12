@@ -12,6 +12,9 @@
 <style lang="scss">
 	// 每个页面公共页面样式
 	@import '@/uni_modules/uni-scss/index.scss';
+	
+	// 引入vant-weapp样式
+	@import '/wxcomponents/@vant/weapp/common/index.wxss';
 	/* uni-app中的条件判断语句 */
 	/* #ifdef APP-PLUS  || H5 */
 	uni-swiper .uni-swiper-dot {

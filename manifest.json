@@ -1,6 +1,6 @@
 {
     "name" : "baby-Jyann-shop",
-    "appid" : "",
+    "appid" : "wx2e7b06a3cf8edff3",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -17,33 +17,58 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "Payment" : {},
+            "Push" : {},
+            "Maps" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
             "android" : {
                 "permissions" : [
-                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
-                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CAMERA\"/>",
-                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
             /* ios打包配置 */
             "ios" : {},
             /* SDK配置 */
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "payment" : {
+                    "weixin" : {
+                        "__platform__" : [ "ios", "android" ],
+                        "appid" : "wx2e7b06a3cf8edff3",
+                        "UniversalLinks" : ""
+                    }
+                },
+                "push" : {
+                    "unipush" : {
+                        "version" : "2",
+                        "offline" : false
+                    }
+                },
+                "maps" : {
+                    "amap" : {
+                        "appkey_ios" : "7dfd30800422c5d0290543719a00f1fe",
+                        "appkey_android" : "7dfd30800422c5d0290543719a00f1fe"
+                    }
+                }
+            }
         }
     },
     /* 快应用特有相关 */
@@ -54,7 +79,17 @@
         "setting" : {
             "urlCheck" : true
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        // 自定义配置
+        "requiredPrivateInfos" : [ "choosePoi", "chooseAddress", "getLocation" ],
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "你的位置信息将用来进行接口调试"
+            }
+        },
+        "unipush" : {
+            "enable" : false
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true

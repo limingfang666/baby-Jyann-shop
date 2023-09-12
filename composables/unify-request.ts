@@ -9,6 +9,7 @@ export async function unifyRequest(funcName: Function, params = {},  errMsg = 'è
 	if(successMsg) showMsg(successMsg);
 	
 	return {
-		list: res.message
+		list: res.message,
+		meta: res.meta
 	}
 }
